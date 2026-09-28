@@ -7,12 +7,12 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,21 +23,21 @@
             background-size: cover;
         }
 
-        /* Lluvia de Flores de Cerezo */
+        /* Lluvia de Flores de Cerezo (Ajustada para que no se corte) */
         .petal {
             position: fixed;
-            top: -10%;
+            top: -10vh;
             background-color: #ffb7c5;
             border-radius: 150% 0 150% 0;
             opacity: 0.8;
             pointer-events: none;
             animation: fall linear infinite, sway ease-in-out infinite alternate;
-            z-index: 10;
+            z-index: 1; /* Debajo de todo */
         }
 
         @keyframes fall {
-            0% { top: -10%; }
-            100% { top: 110%; }
+            0% { top: -10vh; }
+            100% { top: 110vh; }
         }
 
         @keyframes sway {
@@ -45,31 +45,51 @@
             100% { transform: rotate(180deg) translateX(50px); }
         }
 
-        /* Pantalla de Bienvenida */
+        /* Pantalla de Bienvenida (Corregido centrado y emojis) */
         #welcome-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             color: white;
-            z-index: 5;
-            background: rgba(0, 0, 0, 0.55);
-            padding: 25px 20px;
+            z-index: 10; /* Encima de los pétalos */
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px 20px;
             border-radius: 20px;
             backdrop-filter: blur(5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             margin: 15px;
             max-width: 90%;
+            width: 350px;
+        }
+
+        /* Contenedor para el título y emojis en línea */
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            width: 100%;
         }
 
         #welcome-screen h1 {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
+            font-size: 1.6rem;
             color: #ffb7c5;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             line-height: 1.2;
+            white-space: nowrap; /* Evita que el nombre se corte */
+        }
+
+        .title-emoji {
+            font-size: 1.6rem;
         }
 
         #welcome-screen p {
             font-size: 0.95rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            line-height: 1.4;
         }
 
         .btn-open {
@@ -82,24 +102,22 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
             transition: all 0.3s ease;
-        }
-
-        .btn-open:hover {
-            background-color: #ff4757;
-            transform: scale(1.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         /* Contenido Principal */
         #main-content {
             display: none;
-            z-index: 5;
+            z-index: 10;
             max-width: 600px;
             width: 92%;
             margin: 20px auto;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.93);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 25px 18px;
             border-radius: 20px;
@@ -127,10 +145,9 @@
             color: #e84393;
             font-size: 1.05rem;
             margin-top: 15px;
-            line-height: 1.4;
         }
 
-        /* Sección de Cartas Interactivas */
+        /* Sección de Cartas (Corregida alineación y cuadrícula) */
         .letters-section {
             margin-top: 25px;
             border-top: 2px dashed #ffb7c5;
@@ -140,7 +157,11 @@
         .letters-section h2 {
             color: #d63384;
             font-size: 1.3rem;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
         }
 
         .instructions {
@@ -149,18 +170,20 @@
             margin-bottom: 20px;
         }
 
-        /* Grilla adaptada a móviles */
+        /* Grilla adaptada a móviles (Corregida) */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas perfectas */
+            gap: 15px;
             margin-top: 15px;
+            justify-items: center; /* Centra las tarjetas dentro de su celda */
         }
 
         /* Efecto Flip Card 3D */
         .flip-card {
             background-color: transparent;
             width: 100%;
+            max-width: 160px; /* Tamaño máximo para que no se peguen */
             height: 220px;
             perspective: 1000px;
             cursor: pointer;
@@ -203,7 +226,7 @@
             position: relative;
         }
 
-        /* Imagen de dorso personalizada (si existe) */
+        /* Imagen de dorso personalizada (Corregida posición) */
         .flip-card-front img {
             position: absolute;
             top: 0;
@@ -211,13 +234,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 1;
+            z-index: 2; /* Encima del fondo degradado */
         }
 
-        /* Contenido superpuesto si no usas foto de dorso */
+        /* Contenido superpuesto (Se oculta si hay imagen de dorso) */
         .card-content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -228,13 +251,11 @@
             font-size: 2.2rem;
             margin-bottom: 5px;
             line-height: 1;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
         .card-author {
             font-size: 1.05rem;
             font-weight: bold;
-            margin: 0;
             color: white;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
         }
@@ -243,7 +264,6 @@
             font-size: 0.7rem;
             opacity: 0.95;
             margin-top: 4px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
 
         /* Parte trasera (Frente/Carta real) */
@@ -260,9 +280,13 @@
 </head>
 <body>
 
-    <!-- Pantalla de Bienvenida -->
+    <!-- Pantalla de Bienvenida (Corregida) -->
     <div id="welcome-screen">
-        <h1>🌸 Happy Birthday Karan! 🌸</h1>
+        <div class="title-container">
+            <span class="title-emoji">🌸</span>
+            <h1>Happy Birthday Karan!</h1>
+            <span class="title-emoji">🌸</span>
+        </div>
         <p>You have a special message waiting for you.</p>
         <button class="btn-open" onclick="openCard()">Open Message 💌</button>
     </div>
@@ -281,7 +305,7 @@
                 </div>
             </div>
 
-            <!-- Cartas Interactivas -->
+            <!-- Cartas Interactivas (Corregida alineación) -->
             <div class="letters-section">
                 <h2>💌 Look at our letters 💌</h2>
                 <p class="instructions">(Tap each card to read our personal letter)</p>
@@ -291,7 +315,7 @@
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="dorso1.jpg" alt="Dorso Nina" onerror="this.style.display='none'">
+                                <img src="dorso1.jpg" alt="Dorso Nina">
                                 <div class="card-content">
                                     <div class="card-icon">🌸</div>
                                     <p class="card-author">Nina</p>
@@ -308,7 +332,7 @@
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="dorso2.jpg" alt="Dorso Angia" onerror="this.style.display='none'">
+                                <img src="dorso2.jpg" alt="Dorso Angia">
                                 <div class="card-content">
                                     <div class="card-icon">🎀</div>
                                     <p class="card-author">Angia</p>
@@ -325,7 +349,7 @@
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="dorso3.jpg" alt="Dorso Pauli" onerror="this.style.display='none'">
+                                <img src="dorso3.jpg" alt="Dorso Pauli">
                                 <div class="card-content">
                                     <div class="card-icon">⭐</div>
                                     <p class="card-author">Pauli</p>
@@ -342,7 +366,7 @@
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="dorso4.jpg" alt="Dorso Barbara" onerror="this.style.display='none'">
+                                <img src="dorso4.jpg" alt="Dorso Barbara">
                                 <div class="card-content">
                                     <div class="card-icon">💖</div>
                                     <p class="card-author">Barbara</p>
