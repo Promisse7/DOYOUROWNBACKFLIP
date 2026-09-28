@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Karan!</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Great+Vibes&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,16 +14,16 @@
         }
 
         body {
-            font-family: 'Playfair Display', serif; /* Tipografía más elegante */
+            font-family: 'Playfair Display', serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
             position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('fondo.jpg') no-repeat center center fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('fondo.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #d4af37; /* Dorado base */
+            color: #f3e5ab;
         }
 
         /* Lluvia de Flores de Cerezo */
@@ -30,7 +32,7 @@
             top: -10vh;
             background-color: #ffb7c5;
             border-radius: 150% 0 150% 0;
-            opacity: 0.8;
+            opacity: 0.85;
             pointer-events: none;
             animation: fall linear infinite, sway ease-in-out infinite alternate;
             z-index: 1;
@@ -46,6 +48,16 @@
             100% { transform: rotate(180deg) translateX(50px); }
         }
 
+        /* Estilo para Texto Dorado Brillante Metalizado */
+        .gold-text {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 10px rgba(212, 175, 55, 0.3);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+        }
+
         /* Pantalla de Bienvenida */
         #welcome-screen {
             display: flex;
@@ -55,11 +67,12 @@
             text-align: center;
             color: white;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(10, 10, 10, 0.85);
             padding: 40px 20px;
             border-radius: 20px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             margin: 15px;
             max-width: 90%;
             width: 380px;
@@ -69,152 +82,135 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 20px;
             width: 100%;
         }
 
         #welcome-screen h1 {
             font-size: 1.8rem;
-            color: #ffb7c5;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             line-height: 1.2;
-            font-family: 'Pacifico', cursive; /* Toque divertido para el nombre */
         }
 
         .title-emoji {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         #welcome-screen p {
             font-size: 1rem;
             margin-bottom: 30px;
-            line-height: 1.5;
-            font-weight: 300;
+            color: #e0d0b0;
+            font-weight: 400;
         }
 
         .btn-open {
-            background-color: #ff6b81;
+            background: linear-gradient(135deg, #ff6b81, #ff4757);
             color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
+            border: 1px solid #ffb7c5;
+            padding: 14px 32px;
+            font-size: 1.05rem;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 107, 129, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .btn-open:hover {
-            background-color: #ff4757;
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 107, 129, 0.7);
+            box-shadow: 0 6px 20px rgba(255, 107, 129, 0.6);
         }
 
-        /* Contenido Principal - FONDO NEGRO Y LETRAS DORADAS */
+        /* Contenido Principal */
         #main-content {
             display: none;
             z-index: 10;
-            max-width: 650px;
+            max-width: 500px;
             width: 92%;
-            margin: 30px auto;
+            margin: 25px auto;
         }
 
         .card {
-            background: rgba(10, 10, 10, 0.95); /* Negro profundo */
+            background: rgba(12, 12, 12, 0.92);
             backdrop-filter: blur(10px);
-            padding: 35px 25px;
+            padding: 35px 20px;
             border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
             text-align: center;
-            border: 2px solid #d4af37; /* Borde dorado tenue */
+            border: 1px solid rgba(212, 175, 55, 0.4);
         }
 
         .card h1 {
-            color: #ffb7c5; /* Mantenemos rosa para el título principal */
-            font-size: 2rem;
+            font-size: 2.1rem;
             margin-top: 5px;
             margin-bottom: 20px;
             line-height: 1.3;
-            font-family: 'Pacifico', cursive;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .dedication {
-            color: #f0e68c; /* Dorado pálido para el texto */
-            font-size: 1.05rem;
-            line-height: 1.7;
+            font-size: 1.1rem;
+            line-height: 1.8;
             margin-bottom: 30px;
-            font-weight: 300;
+            color: #f5eaaf;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
         .signature {
-            font-weight: bold;
-            color: #d4af37; /* Dorado más intenso para la firma */
-            font-size: 1.15rem;
-            margin-top: 20px;
-            font-style: italic;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            margin-top: 25px;
+            line-height: 1.4;
+            letter-spacing: 1px;
         }
 
         /* Sección de Cartas */
         .letters-section {
             margin-top: 30px;
-            border-top: 2px dashed rgba(212, 175, 55, 0.5); /* Línea dorada discontinua */
+            border-top: 1px dashed rgba(212, 175, 55, 0.4);
             padding-top: 25px;
         }
 
         .letters-section h2 {
-            color: #ffb7c5;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
         }
 
         .instructions {
-            color: #aaa;
+            color: #c0b090;
             font-size: 0.85rem;
             margin-bottom: 25px;
-            font-weight: 300;
+            font-style: italic;
         }
 
-        /* Grilla de Cartas */
+        /* Disposición UNA ABAJO DE LA OTRA */
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
             margin-top: 15px;
-            justify-items: center;
+            width: 100%;
         }
 
-        /* Efecto Flip Card 3D - CORREGIDO GIRO IN-PLACE */
+        /* Cuadradas y grandes para vista individual */
         .flip-card {
             background-color: transparent;
             width: 100%;
-            max-width: 170px;
-            aspect-ratio: 1 / 1; /* FUERZA FORMA CUADRADA */
+            max-width: 280px;
+            aspect-ratio: 1 / 1;
             perspective: 1000px;
             cursor: pointer;
-            position: relative; /* Asegura el posicionamiento relativo */
         }
 
         .flip-card-inner {
-            position: absolute; /* Posicionamiento absoluto dentro del contenedor */
+            position: relative;
             width: 100%;
             height: 100%;
             text-align: center;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
-            top: 0;
-            left: 0;
         }
 
         .flip-card.flipped .flip-card-inner {
@@ -227,81 +223,40 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
-            border: 3px solid #d4af37; /* Borde dorado para las cartas */
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+            border: 2px solid #d4af37;
             overflow: hidden;
+            top: 0;
+            left: 0;
         }
 
         /* Parte frontal (Dorso) */
         .flip-card-front {
-            background: linear-gradient(135deg, #1a1a1a, #000000); /* Degradado oscuro elegante */
-            color: #d4af37;
+            background: #0d0d0d;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 10px;
         }
 
-        /* Imagen de dorso personalizada */
         .flip-card-front img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 2;
-            opacity: 0.8; /* Ligeramente oscurecida para integrar */
         }
 
-        /* Contenido superpuesto (si no hay imagen) */
-        .card-content {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 8px;
-            line-height: 1;
-        }
-
-        .card-author {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #d4af37;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-            font-family: 'Playfair Display', serif;
-        }
-
-        .card-subtext {
-            font-size: 0.75rem;
-            opacity: 0.9;
-            margin-top: 5px;
-            color: #f0e68c;
-        }
-
-        /* Parte trasera (Frente) */
+        /* Parte trasera (Frente/Carta escrita) */
         .flip-card-back {
             transform: rotateY(180deg);
-            background-color: #000; /* Fondo negro detrás de la foto */
+            background-color: #0d0d0d;
         }
 
         .flip-card-back img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Asegura que la carta se vea completa sin cortarse */
+            object-fit: cover;
         }
-
-        /* Fuentes elegantes de Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Pacifico&display=swap');
-
     </style>
 </head>
 <body>
@@ -312,13 +267,13 @@
             const petal = document.createElement('div');
             petal.classList.add('petal');
             
-            const size = Math.random() * 10 + 10; // Un poco más grandes
+            const size = Math.random() * 8 + 8;
             petal.style.width = `${size}px`;
             petal.style.height = `${size}px`;
             petal.style.left = `${Math.random() * 100}vw`;
             
-            const fallDuration = Math.random() * 6 + 6; // Un poco más lenta
-            const swayDuration = Math.random() * 4 + 3;
+            const fallDuration = Math.random() * 5 + 5;
+            const swayDuration = Math.random() * 3 + 2;
             petal.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
             
             document.body.appendChild(petal);
@@ -328,38 +283,38 @@
             }, fallDuration * 1000);
         }
 
-        setInterval(createPetal, 250); // Un poco más frecuente
+        setInterval(createPetal, 300);
     </script>
 
     <!-- Pantalla de Bienvenida -->
     <div id="welcome-screen">
         <div class="title-container">
             <span class="title-emoji">🌸</span>
-            <h1>Happy Birthday Karan!</h1>
+            <h1 class="gold-text">Happy Birthday Karan!</h1>
             <span class="title-emoji">🌸</span>
         </div>
-        <p>A beautiful soul deserves a beautiful day. You have a special message waiting for you.</p>
+        <p>You have a special message waiting for you.</p>
         <button class="btn-open" onclick="openCard()">Open Message 💌</button>
     </div>
 
     <!-- Contenido Principal -->
     <div id="main-content">
         <div class="card">
-            <h1>🎉 Happy Birthday, Karan! 🎉</h1>
+            <h1 class="gold-text">🎉 Happy Birthday, Karan! 🎉</h1>
             
             <div class="dedication">
-                <p>May your day be painted with gold, sprinkled with laughter, and filled with all the love your heart can hold. Wishing you a year as magnificent as you are!</p>
-                <div class="signature">
+                <p>We wish you a wonderful and happy birthday full of joy, love, and laughter!</p>
+                <div class="signature gold-text">
                     With all our love,<br>
                     Your friends Nina, Pauli, Angia,<br>
                     and your love Barbara ❤️
                 </div>
             </div>
 
-            <!-- Cartas Interactivas -->
+            <!-- Cartas Interactivas (Una abajo de la otra) -->
             <div class="letters-section">
-                <h2>💌 Look at our letters 💌</h2>
-                <p class="instructions">(Tap each card to reveal our personal handwritten note)</p>
+                <h2 class="gold-text">💌 Look at our letters 💌</h2>
+                <p class="instructions">(Tap each card to read our personal letter)</p>
                 
                 <div class="gallery">
                     <!-- Carta 1: Nina -->
@@ -367,11 +322,6 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img src="dorso1.jpg" alt="Dorso Nina">
-                                <div class="card-content">
-                                    <div class="card-icon">🌸</div>
-                                    <p class="card-author">Nina</p>
-                                    <span class="card-subtext">Tap to reveal</span>
-                                </div>
                             </div>
                             <div class="flip-card-back">
                                 <img src="frente1.jpg" alt="Carta Nina">
@@ -384,11 +334,6 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img src="dorso2.jpg" alt="Dorso Angia">
-                                <div class="card-content">
-                                    <div class="card-icon">🎀</div>
-                                    <p class="card-author">Angia</p>
-                                    <span class="card-subtext">Tap to reveal</span>
-                                </div>
                             </div>
                             <div class="flip-card-back">
                                 <img src="frente2.jpg" alt="Carta Angia">
@@ -401,11 +346,6 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img src="dorso3.jpg" alt="Dorso Pauli">
-                                <div class="card-content">
-                                    <div class="card-icon">⭐</div>
-                                    <p class="card-author">Pauli</p>
-                                    <span class="card-subtext">Tap to reveal</span>
-                                </div>
                             </div>
                             <div class="flip-card-back">
                                 <img src="frente3.jpg" alt="Carta Pauli">
@@ -418,11 +358,6 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img src="dorso4.jpg" alt="Dorso Barbara">
-                                <div class="card-content">
-                                    <div class="card-icon">💖</div>
-                                    <p class="card-author">Barbara</p>
-                                    <span class="card-subtext">Tap to reveal</span>
-                                </div>
                             </div>
                             <div class="flip-card-back">
                                 <img src="frente4.jpg" alt="Carta Barbara">
@@ -435,14 +370,12 @@
     </div>
 
     <script>
-        // Función para abrir la tarjeta
         function openCard() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Función para dar vuelta la carta al tocarla
         function flip(card) {
             card.classList.toggle('flipped');
         }
