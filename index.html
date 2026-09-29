@@ -24,7 +24,6 @@
             background-color: #000000; /* Fondo negro inicial */
             background-image: none;
             color: #f3e5ab;
-            perspective: 1000px;
             transition: background 1s ease;
         }
 
@@ -69,20 +68,21 @@
             100% { transform: rotate(180deg) translateX(50px); }
         }
 
-        /* Animación Backflip 360° para toda la pantalla */
+        /* Animación Backflip estilo Agujas del Reloj (Gira 360° quedando de cabeza a la mitad) */
         .backflip-animation {
             animation: doBackflip 1.2s ease-in-out forwards;
+            transform-origin: center center;
         }
 
         @keyframes doBackflip {
             0% {
-                transform: rotateX(0deg) scale(1);
+                transform: rotate(0deg) scale(1);
             }
             50% {
-                transform: rotateX(180deg) scale(0.8);
+                transform: rotate(180deg) scale(0.85); /* Queda patas arriba a la mitad */
             }
             100% {
-                transform: rotateX(360deg) scale(1);
+                transform: rotate(360deg) scale(1); /* Vuelve a quedar derecho */
             }
         }
 
@@ -431,7 +431,7 @@
             q.classList.add('question-mark');
             q.innerText = '?';
             
-            const size = Math.random() * 16 + 14; // Tamaños variados
+            const size = Math.random() * 16 + 14;
             q.style.fontSize = `${size}px`;
             q.style.left = `${Math.random() * 100}vw`;
             
@@ -476,26 +476,26 @@
             document.getElementById('error-screen').style.display = 'flex';
         }
 
-        // Ejecuta el giro 360° (Backflip), cambia el fondo y activa los cerezos
+        // Ejecuta el giro 360° en las agujas del reloj, cambia el fondo y activa los cerezos
         function executeBackflip(currentScreenId) {
-            const body = document.getElementById('page-body');
-            body.classList.add('backflip-animation');
+            const currentScreen = document.getElementById(currentScreenId);
+            currentScreen.classList.add('backflip-animation');
 
             setTimeout(() => {
-                // Detener la lluvia de signos de pregunta y eliminar los restantes
+                // Detener la lluvia de signos de pregunta y eliminar los existentes
                 clearInterval(questionInterval);
                 document.querySelectorAll('.question-mark').forEach(q => q.remove());
 
-                // Cambiar fondo y mostrar pantalla de bienvenida
-                body.classList.add('sakura-bg');
-                document.getElementById(currentScreenId).style.display = 'none';
+                // Cambiar fondo a cerezos y mostrar pantalla de bienvenida
+                document.body.classList.add('sakura-bg');
+                currentScreen.style.display = 'none';
+                currentScreen.classList.remove('backflip-animation');
+                
                 document.getElementById('welcome-screen').style.display = 'flex';
 
                 // Iniciar la lluvia de cerezos
                 petalInterval = setInterval(createPetal, 300);
-
-                body.classList.remove('backflip-animation');
-            }, 600); // Cambia el estado justo en la mitad de la rotación (360°)
+            }, 600); // Cambia el contenido justo cuando la tarjeta está dada vuelta
         }
 
         // Abre el mensaje principal
