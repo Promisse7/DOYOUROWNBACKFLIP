@@ -21,19 +21,19 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
-            background-color: #000000; /* Fondo negro inicial */
+            background-color: #000000;
             background-image: none;
             color: #f3e5ab;
-            transition: background 1s ease;
+            transition: background 0.8s ease;
         }
 
-        /* Clase para cambiar al fondo con cerezos */
+        /* Fondo de flores de cerezo */
         body.sakura-bg {
             background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('fondo.jpg') no-repeat center center fixed;
             background-size: cover;
         }
 
-        /* Lluvia de Signos de Pregunta */
+        /* Lluvia de signos de pregunta */
         .question-mark {
             position: fixed;
             top: -10vh;
@@ -46,7 +46,7 @@
             user-select: none;
         }
 
-        /* Lluvia de Flores de Cerezo */
+        /* Lluvia de pétalos */
         .petal {
             position: fixed;
             top: -10vh;
@@ -68,25 +68,62 @@
             100% { transform: rotate(180deg) translateX(50px); }
         }
 
-        /* Animación Backflip estilo Agujas del Reloj (Gira 360° quedando de cabeza a la mitad) */
-        .backflip-animation {
-            animation: doBackflip 1.2s ease-in-out forwards;
+        /* ANIMACIÓN BACKFLIP COMPLETA (0° a 360°) */
+        .backflip-full {
+            animation: full360 1s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
             transform-origin: center center;
         }
 
-        @keyframes doBackflip {
+        @keyframes full360 {
             0% {
                 transform: rotate(0deg) scale(1);
             }
             50% {
-                transform: rotate(180deg) scale(0.85); /* Queda patas arriba a la mitad */
+                transform: rotate(180deg) scale(0.8);
             }
             100% {
-                transform: rotate(360deg) scale(1); /* Vuelve a quedar derecho */
+                transform: rotate(360deg) scale(0); /* Se encoge por completo al terminar la vuelta */
+                opacity: 0;
             }
         }
 
-        /* Texto Dorado Elegante */
+        /* Partículas de la Explosión */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 100;
+            animation: explode 0.8s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Animación de entrada por estallido para el mensaje */
+        .pop-in {
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.2);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Texto Dorado */
         .gold-text {
             color: #d4af37;
             background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 30%, #b38728 60%, #fbf5b7 80%, #aa771c 100%);
@@ -96,7 +133,7 @@
             font-family: 'Cinzel', serif;
         }
 
-        /* Tarjetas de Pantalla General */
+        /* Tarjetas Generales */
         .screen-card {
             display: flex;
             flex-direction: column;
@@ -238,7 +275,7 @@
             font-style: italic;
         }
 
-        /* Galería Una debajo de la otra */
+        /* Galería */
         .gallery {
             display: flex;
             flex-direction: column;
@@ -311,17 +348,17 @@
 </head>
 <body id="page-body">
 
-    <!-- 1. Pantalla Inicial (Elección) -->
+    <!-- 1. Pantalla Inicial -->
     <div id="choice-screen" class="screen-card">
         <h1 class="gold-text">Hello Karan, how are you?</h1>
         <p>Which option are you going to choose today?</p>
         <div class="btn-group">
-            <button class="btn-action" onclick="executeBackflip('choice-screen')">DO A BACK FLIP 🤸‍♂️</button>
+            <button class="btn-action" onclick="executeBackflip('choice-screen')">DO A BACK FLIP 🤸‍♂️️</button>
             <button class="btn-action btn-secondary" onclick="showErrorScreen()">STAY STANDING 🧍‍♂️</button>
         </div>
     </div>
 
-    <!-- 2. Pantalla de Error (Solo si elige 'Stay standing') -->
+    <!-- 2. Pantalla de Error -->
     <div id="error-screen" class="screen-card" style="display: none;">
         <h1 style="color: #ff4757;">Error ❌</h1>
         <p>You chose the wrong option.<br>Try again!</p>
@@ -359,7 +396,6 @@
                 </div>
             </div>
 
-            <!-- Cartas Interactivas (Una abajo de la otra) -->
             <div class="letters-section">
                 <h2 class="section-title">
                     <span>💌</span>
@@ -369,7 +405,6 @@
                 <p class="instructions">(Tap each card to read our personal letter)</p>
                 
                 <div class="gallery">
-                    <!-- Carta 1: Nina -->
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
@@ -381,7 +416,6 @@
                         </div>
                     </div>
 
-                    <!-- Carta 2: Angia -->
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
@@ -393,7 +427,6 @@
                         </div>
                     </div>
 
-                    <!-- Carta 3: Pauli -->
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
@@ -405,7 +438,6 @@
                         </div>
                     </div>
 
-                    <!-- Carta 4: Barbara -->
                     <div class="flip-card" onclick="flip(this)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
@@ -423,89 +455,109 @@
 
     <script>
         let questionInterval;
-        let petalInterval;
 
-        // Genera signos de pregunta cayendo
         function createQuestionMark() {
             const q = document.createElement('div');
             q.classList.add('question-mark');
             q.innerText = '?';
-            
             const size = Math.random() * 16 + 14;
             q.style.fontSize = `${size}px`;
             q.style.left = `${Math.random() * 100}vw`;
-            
             const fallDuration = Math.random() * 4 + 4;
             const swayDuration = Math.random() * 3 + 2;
             q.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
-            
             document.body.appendChild(q);
-            
-            setTimeout(() => {
-                q.remove();
-            }, fallDuration * 1000);
+            setTimeout(() => { q.remove(); }, fallDuration * 1000);
         }
 
-        // Genera flores de cerezo
         function createPetal() {
             const petal = document.createElement('div');
             petal.classList.add('petal');
-            
             const size = Math.random() * 8 + 8;
             petal.style.width = `${size}px`;
             petal.style.height = `${size}px`;
             petal.style.left = `${Math.random() * 100}vw`;
-            
             const fallDuration = Math.random() * 5 + 5;
             const swayDuration = Math.random() * 3 + 2;
             petal.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
-            
             document.body.appendChild(petal);
-            
-            setTimeout(() => {
-                petal.remove();
-            }, fallDuration * 1000);
+            setTimeout(() => { petal.remove(); }, fallDuration * 1000);
         }
 
-        // Inicia la lluvia de signos de pregunta
         questionInterval = setInterval(createQuestionMark, 250);
 
-        // Muestra pantalla de error si elige "Stay standing"
         function showErrorScreen() {
             document.getElementById('choice-screen').style.display = 'none';
             document.getElementById('error-screen').style.display = 'flex';
         }
 
-        // Ejecuta el giro 360° en las agujas del reloj, cambia el fondo y activa los cerezos
+        // Efecto de Explosión con chispas doradas y rosa
+        function triggerExplosion() {
+            const colors = ['#d4af37', '#fcf6ba', '#ff6b81', '#ffb7c5', '#ffffff'];
+            const particleCount = 60;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            for (let i = 0; i < particleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 10 + 6;
+                sparkle.style.backgroundColor = color;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.left = `${centerX}px`;
+                sparkle.style.top = `${centerY}px`;
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 250 + 100;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+
+                sparkle.style.setProperty('--dx', `${dx}px`);
+                sparkle.style.setProperty('--dy', `${dy}px`);
+
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => { sparkle.remove(); }, 800);
+            }
+        }
+
+        // Ejecuta el giro 360° completo y luego la explosión
         function executeBackflip(currentScreenId) {
             const currentScreen = document.getElementById(currentScreenId);
-            currentScreen.classList.add('backflip-animation');
+            currentScreen.classList.add('backflip-full');
 
+            // Esperar exactamente a que finalice el giro completo de 360° (1000ms)
             setTimeout(() => {
-                // Detener la lluvia de signos de pregunta y eliminar los existentes
+                // 1. Detener signos de pregunta
                 clearInterval(questionInterval);
                 document.querySelectorAll('.question-mark').forEach(q => q.remove());
 
-                // Cambiar fondo a cerezos y mostrar pantalla de bienvenida
-                document.body.classList.add('sakura-bg');
+                // 2. Ocultar la tarjeta anterior
                 currentScreen.style.display = 'none';
-                currentScreen.classList.remove('backflip-animation');
-                
-                document.getElementById('welcome-screen').style.display = 'flex';
 
-                // Iniciar la lluvia de cerezos
-                petalInterval = setInterval(createPetal, 300);
-            }, 600); // Cambia el contenido justo cuando la tarjeta está dada vuelta
+                // 3. Cambiar fondo y disparar explosión
+                document.body.classList.add('sakura-bg');
+                triggerExplosion();
+
+                // 4. Revelar la pantalla de bienvenida con efecto estallido
+                const welcomeScreen = document.getElementById('welcome-screen');
+                welcomeScreen.style.display = 'flex';
+                welcomeScreen.classList.add('pop-in');
+
+                // 5. Iniciar la lluvia de cerezos
+                setInterval(createPetal, 300);
+            }, 1000); 
         }
 
-        // Abre el mensaje principal
         function openCard() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Voltea la carta al tocarla
         function flip(card) {
             card.classList.toggle('flipped');
         }
